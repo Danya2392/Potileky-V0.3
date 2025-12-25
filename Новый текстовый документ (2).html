@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Team | Крипто-мониторинг</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #00cec9;
+            --accent: #ff7675;
+            --dark: #0f0c29;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            margin: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Общие стили для секций */
+        .section {
+            display: none; /* Все секции скрыты по умолчанию */
+            min-height: 100vh;
+            padding: 40px 20px;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .active {
+            display: flex; /* Показываем только активную секцию */
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Главный экран */
+        .hero {
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(15, 12, 41, 0.7), rgba(15, 12, 41, 0.7)), 
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2072') center/cover no-repeat;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            background: linear-gradient(to right, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(0, 206, 201, 0.5));
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin: 20px 0 40px;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Кнопки */
+        .btn {
+            padding: 15px 40px;
+            border: 2px solid var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            background: transparent;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            box-shadow: 0 0 30px var(--secondary);
+        }
+
+        /* Список участников */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--secondary);
+        }
+
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ИСПРАВЛЕНИЕ: Пробел в имени */
+        .card h2 {
+            font-size: 1.5rem;
+            margin: 5px 0;
+            line-height: 1.1; /* Плотное прилегание строк */
+            color: #fff;
+        }
+
+        .role {
+            color: var(--accent);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 900;
+        }
+
+        /* Личная страница */
+        .profile-view {
+            max-width: 800px;
+            width: 100%;
+            background: var(--glass);
+            padding: 50px;
+            border-radius: 40px;
+            margin-top: 50px;
+        }
+
+        .back-link {
+            align-self: flex-start;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="home" class="section active hero">
+        <h1>Dream Team</h1>
+        <p>Создаем IT решения будущего. Команда разработки.</p>
+        <button class="btn" onclick="showSection('team')">Посмотреть команду</button>
+    </section>
+
+    <section id="team" class="section">
+        <div class="back-link" onclick="showSection('home')">< На главную</div>
+        <h2 style="font-size: 2.5rem;">Наша Команда</h2>
+        
+        <div class="container">
+            <div class="card" onclick="showProfile('vlad')">
+                <div class="avatar"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=500"></div>
+                <h2>Владислав<br>Владимиров</h2>
+                <div class="role">Lead Backend Developer</div>
+                <button class="btn" style="padding: 8px 20px; font-size: 0.7rem;">Профиль</button>
+            </div>
+
+            <div class="card" onclick="showProfile('albert')">
+                <div class="avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=500"></div>
+                <h2>Альберт<br>Каримов</h2>
+                <div class="role">Frontend & UI Design</div>
+                <button class="btn" style="padding: 8px 20px; font-size: 0.7rem;">Профиль</button>
+            </div>
+
+            <div class="card" onclick="showProfile('daniyor')">
+                <div class="avatar"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=500"></div>
+                <h2>Данияр<br>Мамедов</h2>
+                <div class="role">Crypto Analyst</div>
+                <button class="btn" style="padding: 8px 20px; font-size: 0.7rem;">Профиль</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="profile" class="section">
+        <div class="back-link" onclick="showSection('team')">< Назад к списку</div>
+        <div id="profile-content" class="profile-view">
+            </div>
+    </section>
+
+    <script>
+        // Данные участников
+        const teamData = {
+            vlad: {
+                name: "Владислав Владимиров",
+                role: "Lead Backend Developer",
+                bio: "Эксперт в архитектуре баз данных и безопасности. Отвечает за связь с API Binance.",
+                skills: "Python, SQL, Docker, FastAPI"
+            },
+            albert: {
+                name: "Альберт Каримов",
+                role: "Frontend & UI Design",
+                bio: "Создает интуитивно понятные интерфейсы. Разрабатывал дизайн этого сайта.",
+                skills: "JavaScript, React, CSS3, Figma"
+            },
+            daniyor: {
+                name: "Данияр Мамедов",
+                role: "Crypto Analyst",
+                bio: "Анализирует тренды рынка и настраивает алгоритмы Telegram-бота.",
+                skills: "TradingView, Node.js, Market Analysis"
+            }
+        };
+
+        // Функция переключения экранов
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        // Функция показа профиля
+        function showProfile(personKey) {
+            const data = teamData[personKey];
+            const content = document.getElementById('profile-content');
+            
+            content.innerHTML = `
+                <h1 style="color: var(--secondary); margin-bottom: 10px;">${data.name}</h1>
+                <div class="role" style="font-size: 1.2rem;">${data.role}</div>
+                <hr style="border: 0; border-top: 1px solid var(--glass); margin: 30px 0;">
+                <h3>О себе:</h3>
+                <p style="line-height: 1.8; font-size: 1.1rem;">${data.bio}</p>
+                <h3>Навыки:</h3>
+                <p style="color: var(--secondary); font-weight: bold;">${data.skills}</p>
+                <button class="btn" style="margin-top: 30px;" onclick="alert('Связаться с ${data.name.split(' ')[0]}')">Написать сообщение</button>
+            `;
+            
+            showSection('profile');
+        }
+    </script>
+
+</body>
+</html>
